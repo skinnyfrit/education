@@ -3,22 +3,37 @@
 This repository contains notes about my Year 2 Sem 1 courses.
 
 ## Course Structure
-TCX2002
-TCX2004
-TCX2102
+### Final Exam
+| CourseID | Course Name | Date | Time | Venue | Seat No. |
+| ------------- | ------------- | ------------- | ------------- | ------------- | ------------- |
+| TCX2002 | Intro to BA | 24-Nov-2025, Monday | 0900 - 1100 | TBA | TBA |
+| TCX2004 | Intro to AppDev | 27-Nov-2025, Thursday | 0900 - 1100 | TBA | TBA | 
+| TCX2102 | Prob & Stats | 28-Nov-2025, Friday | 0900 - 1100 | TBA | TBA |
 
+### Assignment & Tests
+[**TCX2002 - Intro to BA**]
+| Component | Weightage | Date | Remarks |
+|---|---|---|---|
+| Assignment 1 | 20% | 31-Aug-2025 | L1-L3 |
+| Assignment 2 | 20% | 09-Oct-2025 | L4-L8 |
+| Mid-term Quiz | 20% | 30-Sep-2025 | L1-L6. Open-book. Only laptop, no internet. LT16. |
+| Final Exam | 40% | 24-Nov-2025 | MCQ + Short Ans Q. Closed-book. 1 A4 size cheatsheet. |
 
-### TCX2002
-Weightage
+**TCX2004 - Intro to AppDev**  
 
-Test details
+| Component | Weightage | Date | Remarks |
+|---|---|---|---|
+| Class Participation | 5% | N/A | Attend & submit tutorials. Best 5 of 6. |
+| Group Project | 35% | 14-Nov-2025 | 3 iter (7%) + final submission (14%) |
+| Tests | 25% | Every Odd Week | Best 4 of 6. |
+| Final Exam | 35% | 24-Nov-2025 | Written. Open-book. Non-digital. No calculators/computers. |
 
-### TCX2004
-Weightage
+**TCX2102 - Probability & Statistics**
 
-Test details
-
-### TCX2102
-Weightage
-
-Test details
+| Component | Weightage | Date | Remarks |
+|---|---|---|---|
+| Weekly Quiz | 10% | Every week | 1 quiz 1% |
+| Test 1 | 10% | 10-Sep-2025 | W5 |
+| Test 2 | 10% | 01-Oct-2025 | W7 |
+| Test 3 | 10% | 15-Oct-2025 | W9 |
+| Final Exam | 60% | 24-Nov-2025 | TBA |
