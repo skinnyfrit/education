@@ -53,14 +53,14 @@ Accessing items in a vector: ``vector[1]``
 https://github.com/skinnyfrit/education/blob/35ea162a365398e1090758504e18c791bf0c8a57/tcx2002.r#L1-L4  
 Hierarchy for data type coercion: 
 > Logical < Integer < Double (Numeric) < Complex (Imaginary value) < Character
-Logical being weakest and Character being strongest  
+- Logical being weakest and Character being strongest  
 
 Fixing numeric vector that includes character type: ``as.numeric()``  
 To be able to parse values after conversion, include na.rm = T :``mean(vector, na.rm = TRUE)`` 
 
 ## Matrices
-Changing 1-D vector to 2-D matrix
-https://github.com/skinnyfrit/education/blob/35ea162a365398e1090758504e18c791bf0c8a57/tcx2002.r#L5-L18 
+Changing 1-D vector to 2-D matrix  
+https://github.com/skinnyfrit/education/blob/35ea162a365398e1090758504e18c791bf0c8a57/tcx2002.r#L5-L18  
 Accessing items in a matrix: ``matrix[1,2]`` or ``matrix[row_name, col_name]``
 *can use both indexing and row/col name*
 
@@ -135,9 +135,9 @@ Examples of machine learning applications in businesses
 | HR | Employee retention | Reduce turnover | $15k+ per retained employee |
 
 > [!IMPORTANT]
-> Good input -> good output. ML requires good data to work.
-> More data != better results. No correlation!
-> Simple models often outperform complex ones!
+> Good input -> good output. ML requires good data to work.  
+>   More data != better results. No correlation!  
+>   Simple models often outperform complex ones!
 
 ### Types of Machine Learning
 1. Supervised Learning: Use when labeled data is available and specific predictions are needed
