@@ -37,3 +37,15 @@ This repository contains notes about my Year 2 Sem 1 courses.
 | Test 2 | 10% | 01-Oct-2025 | W7 |
 | Test 3 | 10% | 15-Oct-2025 | W9 |
 | Final Exam | 60% | 24-Nov-2025 | TBA |
+
+# temporary
+- https://realpython.com/python3-object-oriented-programming/#how-do-you-inherit-from-another-class-in-python
+- https://education.rstudio.com/learn/beginner/
+- https://www.datacamp.com/tutorial/r-studio-tutorial
+- https://posit.co/resources/cheatsheets/?type=posit-cheatsheets/
+- https://rstudio.github.io/cheatsheets/html/tidyr.html
+- https://rstudio.github.io/cheatsheets/html/data-transformation.html
+- https://rstudio.github.io/cheatsheets/html/data-visualization.html
+- https://rstudio.github.io/cheatsheets/html/data-visualization.html
+- https://rstudio.github.io/cheatsheets/html/posit-team.html
+- https://www.datascience-pm.com/crisp-dm-2/#What_are_the_6_CRISP-DM_Phases
