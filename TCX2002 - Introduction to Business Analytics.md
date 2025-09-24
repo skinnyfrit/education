@@ -94,6 +94,9 @@ https://github.com/skinnyfrit/education/blob/35ea162a365398e1090758504e18c791bf0
     - `dataframe[grepl("^A", dataframe$column1),]` *finds all data in column1 starting with "A" (using grepl for pattern matching)*
 
 ## Special Values & Missing Data
+NA  
+is.na()  
+sum(is.na()) # gives total number of NA values  
 
 
 ## Reading and Writing Data
@@ -126,7 +129,7 @@ vs
 data + ans -> rules (model)
 
 Examples of machine learning applications in businesses
-| Indsutry | ML Application | Business Value | Typical ROI (examples) |
+| Industry | ML Application | Business Value | Typical ROI (examples) |
 |---|---|---|---|
 | Retail | Demand forecasting | Optimal inventory levels | 15-20% cost reduction |
 | Marketing | Customer segmentation | Targeted campaigns | 20-30% better conversion |

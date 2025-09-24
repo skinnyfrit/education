@@ -239,8 +239,250 @@ Software Development Life Cycle (SDLC):
     - Scrum vs Extreme Programming
 
 # L03: Requirements
+## 3.1 Requirements
+| Brownfield Projects | Greenfield Projects |
+|-|-|
+| Enhancing, replacing, integrating existing systems | Developing new system from scratch |
+
+### Categories of requirements
+- **Functional requirements**: Specifies what the system _should_ do
+    - **Examples:** User can do this or that
+- **Non-functional requirements**: Specifies _constraints_ under which system is developed and operated
+    - Data requirements: size, volatility, persistency, etc.
+    - Environment requirements: technical environment, compatibility
+    - Other categories: Accessibility, Capacity, Compliance, Documentation, Disaster recovery, Efficiency, Extensibility, Fault tolerance, Interoperability, Maintainability, Privacy, Portability, Quality, Reliability, Response time, Robustness, Scalability, Security, Stability, Testability, and more
+    - **Examples:** App should minimise battery, app must trigger alarm (not technically required for the app to work, but it's a constraint)
+
+## 3.2 Specifying Requirements
+**Formats**
+- Prose: Natural language desc for context and rationale (textual description)
+- Feature lists: High-level checklist of system capabilities (list of features of a product grouped according to criteria)
+- User stories: Short statements from user's perspective (short, simple descriptions of a feature, _As a {user}, I can {function} so that {benefit}._ Benefits may be omitted if obvious)
+- Use cases: Structured scenarios of user-system interactions
+(Supplementary requirements: capture requirements that do not fit elsewhere. Typically NFR)
+
+### Recipe for Brainstorming User Stories
+0. Clear mind of preconceived product ideas
+1. Define target user as a persona
+2. Define problem scope
+3. List scenarios to form narrative
+4. List user stories to support scenarios
+
+### Official Format
+```
+System: System Name 
+Use Case: Identifier - Functionality [use case diagram: summarises actors and use cases in a system]
+Actors: Entities that interact w system but not part of
+Preconditions: _(optional)_ required system state before use case
+Guarantees: _(optional)_ what the use case delivers upon completion
+
+Main Success Scenario (MSS):
+Steps for a use case, assuming everything proceeds without errors.
+
+Extensions:
+Exceptional/alternative flow of events
+```
+**Use cases guidelines**:
+- Capture actor's goal/intention (not technical details)
+- Emphasize interaction between system and external actors
+- Describe externally observable behaviour (avoid internal system workings)
+- Exclude implementation or UI specifics - focus on **outcome**
+    - _User clears input_ vs _User right-clicks text box and chooses 'clear'_
+
+## 3.3 Architecture
+Architecture diagrams are free-form diagrams.
+
+**Architectural Styles/Patterns**
+- N-tier/Multi-layered/Layered: Higher layers makes use of services provided by lower layers
+- Client-server: at least 1 component playing role of server and at least 1 client component accessing services of server
+- Transaction processing: divides workload of system down to no. of transactions 
+- Service-oriented (SOA): builds applications by combining functionalities packaged as programmatically accessible services
+- Event-driven: controls flow of application by detecting events from event entities and communicating those events to interested event consumers
 
 # L04: Object-Oriented Design
+## 4.1 Design Fundamentals
+**Two main aspects of design:**
+1. Product/External design
+    - Defines how product behaves to meet user needs
+    - Done by product designers (e.g. UI, UX design)
+2. Implementation/Internal design
+    - Specifies how product is built to achieve desired behaviour
+    - Done by softare architexts (software architecture)
+
+### Abstraction
+Focus on essential aspects of a system by hiding unnecessary details.
+1. Data abstraction
+    - abstracting away the lower level data items, focus on bigger entities (e.g. `Student` object instead of `name`, `dob`, etc)
+2. Control abstraction
+    - abstracting away details of actual control flow, focus on tasks at higher levels (e.g. using Python without knowing how binary codes or how the hardware works)
+OOP class is an abstraction over related data and behaviours.
+
+### Coupling
+Measure degree of dependence between components, classes, methods.
+
+|Low Coupling|High Coupling|
+|-|-|
+|Lesser dependencies of components| Higher dependencies of components|
+|Easier to understand, reduce risk that change in 1 part will break others|Undesirable, maintenance and evolution difficult|
+
+**Types of coupling**
+|Type|Description|
+|-|-|
+|Content|One module relies on/modifies another's internals|
+|Common/Global|Modules share global data, leading to hidden dependencies|
+|Control|One module influences another's logic by passing control info|
+|Data|Modules interact by passing only necessary data|
+|External|Modules depend on external formats or protocols|
+|Subclass|A subclass depends on its parent class|
+|Temporal|Actions grouped only because they occur together in time|
+
+## Cohesion
+Measure of how strongly-related and focused various responsibilities of a component are
+|Low Cohesion|High Cohesion|
+|-|-|
+|Component handles unrelated tasks| Component focuses on single, well-defined purpose|
+|Harder to understand, maintain and reuse|Easier to understand, maintan and reuse|
+
+**Improving Cohesion**
+- Group code by:
+    - Concept _(e.g. all student-related features together)_
+    - Timing _(e,g, initialisation routines together)_
+    - Data _(e.g. game session storage & retrieval together)_
+
+## Models
+Simplifies a complex system by highlighting only relevant aspects (abstraciton).
+
+**Modeling a solution**
+|Modeling Structures|Modeling Behaviours|
+|-|-|
+|Represents static aspects of a system (components, attributes, relationships)|Represents dynamic aspects of a system (component interaction and how they change over time)|
+|Architecture diagrams, Class diagrams, etc|Use case diagrams, Sequence diagrams, etc|
+
+## 4.2 Modeling Structures
+### Class Diagrams
+|Class name|
+|-|
+|Attributes _(optional)_|
+|Methods/Operations _(optional)_|
+
+#### Annotation for Class-like Entities
+- Enumeration ``from enum import Enum   class Color(Enum): Red = 1 Blue = 2 Green = 3``
+- Interface
+- Abstract
+#### Visibility
+Indicates level of access allowed for each attribute/operation
+- Private: only accessible _within class_
+- Protected: accessible within class _& subclasses_
+- Public: accessible anywhere
+|Visibility|Java|Python|
+|-|-|-|
+|- private|`private`|2 leading underscores: `__private_class`|
+|# protected|`protected`|1 leading underscore: `_protected_class`|
+|+ public|`public`|Default|
+|- package private|Default|N/A|
+#### Class-level
+Underlines denote class-level attributes and methods
+```
+class Student:
+    _school_name = "NUS"
+
+    def __init__(self, name):
+        self.name = name
+        self.__student_id = None
+
+    @classmmethod
+    def get_school_name(cls):
+        return cls._school_name
+```
+
+|Student|
+|-|
+|+ name: str    - student_id:str    <u># school_name : str</u>|
+|+ init(name:str)   <u>+ get_school_name():str</u>|
+### Relationships
+> [!IMPORTANT]
+> Association can be shown as an attribute instead of a line
+
+**Types of relationships**
+- Inheritance
+- Association
+- Dependency
+> [!NOTE]
+> Only use dependency if dependency not already represented!!
+> If Association/Inheritance present, no need for dependency arrow!
+
+![alt text](relationshiparrow.png)
+
+#### Inheritance (Is-a r/s)
+Subclass <u>inherits</u> from superclass
+- Base (super): OG class
+- Derived (sub): Inherits from base (can add/override features)
+```
+class Person:
+    pass
+class Student(Person):
+    pass
+class Staff(Person):
+    pass
+```
+
+#### Association (has-a r/s)
+General connection between classes
+![alt text](associationlabels.png)
+```
+class Person:
+    def __init__(self, employer):
+        self.employer = employer
+class Company:
+    pass
+```
+> In above example, `Person` relates to `Company` as an employer.
+Role further away from class indicates the role played by _other_ class.
+
+**Multiplicity** dictates how many objects take part in each association.
+- `0..1` : Optional. can be linked to 0 or 1 objects
+- `1` : Compulsory. MUST be linked to 1 object at all times
+- `*` : can be linked to 0 or more objects
+- `n..m` : number of linked objects MUST be within n to m (inclusive)
+![alt text](multiplicity.png)
+
+**Navigability**
+- Unidirectional: only 1 object holds reference to other `-->`
+- Bidirectional: both objects hold reference to each other (mutal access) `<-->`
+
+**Association Class**
+![alt text](associationclass.png)
+
+1. **Composition**: STRONG (part CANNOT exist without whole)
+Parts are separate classes, but lifetime depends on whole
+```
+class Building:
+    def __init__(self):
+        self.room = Room()
+class Room:
+    pass
+```
+> In above example, `Room` is part of `Building`.
+
+2. **Aggregation**: WEAK (part can exist <u>independently</u>)
+Container-contained relationship
+```
+class Club:
+    def __init__(self, persons):
+        self.persons = persons
+
+class Person:
+    pass
+```
+> In above example, `Person` is member of `Club`.
+
+#### Dependency (Uses r/s)
+One class <u>temporarily</u> uses another
+```
+
+```
+
+## 4.3 Modeling Behaviours
 
 # L05: Backend - FastAPI
 
