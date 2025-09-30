@@ -60,7 +60,7 @@ To be able to parse values after conversion, include na.rm = T :``mean(vector, n
 
 ## Matrices
 Changing 1-D vector to 2-D matrix  
-https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L6-L18  
+https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L6C1-L18C23 
 Accessing items in a matrix: ``matrix[1,2]`` or ``matrix[row_name, col_name]``
 *can use both indexing and row/col name*
 
@@ -77,10 +77,10 @@ c("Electronics", "Clothing", "Electronics", "Books", "Clothing")
 product categories: (no factor involvement, no proper levels set, thus they are set alphabetically)
 Levels: Books Clothing Electronics
 ```
-https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L20-L37 
+https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L20C1-L37C31 
 
 ## Data Frames (Tables)
-https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L39-L57 
+https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L39C1-L57C32  
 - Show first 6 rows: `head()`
 - Show last 6 rows: `tail()`
 - Inspect data frame structure: `str()` *shows col types and first few values*
