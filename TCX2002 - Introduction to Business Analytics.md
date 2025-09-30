@@ -50,7 +50,7 @@ Accessing items in a vector: ``vector[1]``
 *similar to python*
 
 ## R Vector Type Coercion
-https://github.com/skinnyfrit/education/blob/35ea162a365398e1090758504e18c791bf0c8a57/tcx2002.r#L1-L4  
+https://github.com/skinnyfrit/education/blob/35ea162a365398e1090758504e18c791bf0c8a57/tcx2002.r#L1-L4
 Hierarchy for data type coercion: 
 > Logical < Integer < Double (Numeric) < Complex (Imaginary value) < Character
 - Logical being weakest and Character being strongest  
@@ -59,8 +59,8 @@ Fixing numeric vector that includes character type: ``as.numeric()``
 To be able to parse values after conversion, include na.rm = T :``mean(vector, na.rm = TRUE)`` 
 
 ## Matrices
-Changing 1-D vector to 2-D matrix  
-https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L6-L18  
+Changing 1-D vector to 2-D matrix
+https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L6-L18
 Accessing items in a matrix: ``matrix[1,2]`` or ``matrix[row_name, col_name]``
 *can use both indexing and row/col name*
 
@@ -77,10 +77,10 @@ c("Electronics", "Clothing", "Electronics", "Books", "Clothing")
 product categories: (no factor involvement, no proper levels set, thus they are set alphabetically)
 Levels: Books Clothing Electronics
 ```
-https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L20-L37  
+https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L20-L37
 
 ## Data Frames (Tables)
-https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L39-L57 
+https://github.com/skinnyfrit/education/blob/5b741e74665d61ff0436dceaa15c6f6c39aa8a96/tcx2002.r#L39-L57
 - Show first 6 rows: `head()`
 - Show last 6 rows: `tail()`
 - Inspect data frame structure: `str()` *shows col types and first few values*
