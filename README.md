@@ -48,4 +48,7 @@ This repository contains notes about my Year 2 Sem 1 courses.
 - https://rstudio.github.io/cheatsheets/html/data-visualization.html
 - https://rstudio.github.io/cheatsheets/html/data-visualization.html
 - https://rstudio.github.io/cheatsheets/html/posit-team.html
+
 - https://www.datascience-pm.com/crisp-dm-2/#What_are_the_6_CRISP-DM_Phases
+
+- https://nus-cs2103-ay1819s1.github.io/cs2103-website/
