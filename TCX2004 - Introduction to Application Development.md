@@ -485,8 +485,245 @@ One class <u>temporarily</u> uses another
 ## 4.3 Modeling Behaviours
 
 # L05: Backend - FastAPI
+## 5.1 HTTP Request/Response
+HyperText Transfer Protocol (HTTP):  
+Client __(sends requests)__ -- Server __(processes and responds)__
+<details>
+<summary>Properties </summary>
+
+- Stateless: Independent request; info from prev req not retained by server (regardless same client or not)
+- Communicates using TCP: (port 80: HTTP, port 443: HTTPS)
+- Abstraction: Hides lower-level complexity & focuses on essentials (State can be managed on top of HTTP using e.g. cookies)
+</details>
+
+<details>
+<summary>Connection Types</summary>
+
+(also known as `keep-alive` setting)
+1. **Non-persistent HTTP**
+    - indiv req/response uses *separate* TCP connection
+    - closed after each response
+    - increases overhead
+
+2. **Persistent HTTP** (default in HTTP/1.1)
+    - keeps TCP connection open for multiple req/responses
+    - reduces latency & overhead
+</details>
+
+sp: space character  
+cr: carraige return  
+lg: line feed  
+<details>
+<summary>Request/Response Message Format</summary>
+
+```
+[Request Line] method {sp} URL {sp} Version {cr} {lf}
+
+[Header Lines] header field name: {sp} value {cr} {lf}
+[Header Lines] [lines]
+[Header Lines] header field name: {sp} value {cr} {lf}
+
+[Blank Line] {cr} {lf}
+
+[Entity Body] [body]
+```
+</details>
+
+**Example**
+```
+$ curl -v -X POST -H "Content-Type: application/json" -d '{"name": "Book", "qty": 2}' google.com
+POST / HTTP/1.1
+Host: google.com
+User-Agent: curl/8.11.1
+Accept: */*
+Content-Type: application/json
+Content-Length: 26
+
+{"name": "Book", "qty": 2}
+```
+
+### Request Line - Methods
+|Method|Description|
+|-|-|
+|**GET**|Retrieves data|
+|**POST**|Submits data (state changes/side effects to server)|
+|**PUT**|Replaces ALL items with request content|
+|**PATCH**|Replaces PARTIALLY to a resource|
+|**DELETE**|Deletes specified resource|
+|HEAD|Similar to **GET** (but without response body)|
+|CONNECT|Establishes tunnel to server (identified by target resource)|
+|OPTIONS|Describes communication options for target resource|
+|TRACE|Performs message loop-back test along path to target resource|
+
+### Request Line - URL
+Uniform Resource Locator (URL)
+`scheme ":" ["//" authority] path ["?"query] ["#" fragment]`
+|Component|Description|
+|-|-|
+|Scheme|Protocol (http, https, etc)|
+|Authority|Hots/Hostname (e.g. google.com ;optionally with user info: e.g. user:pass@example.com)|
+|Path|Specifies resource (often reflects hierarchy)|
+|Query|Key-Value pair (separated by &) for filtering,searching,pagination|
+|Fragment|Points to specific part of resource (e.g. anchor in a HTML page) Handled by server and NOT sent to server|
+
+### Status Code/Phrases
+|Status Code Range|Description|Common Codes|
+|-|-|-|
+|100-199|Information response||
+|200-299|Successful response|200 OK [request succeeded], 201 Created [Resource created as a result of request], 204 No Content [Request succeeded, no content to return]|
+|300-399|Redirection messages|301 Moved Permanently [Resource permanently moved], 302 Found [Resource temporarily moved]|
+|400-499|Client error responses|400 Bad Request [server unable to process request], 401 Unauthorized [Auth required/failed] 403 Forbidden [Server refuses to fulfill request], 404 Not Found [Requested resource could not be found]|
+|500-599|Server error responses|500 Internal Server Error [Generic server error], 502 Bad Gateway [Invalid repsonse from upstream server], 503 [Server currently unable to handle request]|
+
+## 5.2 REST API
+REpresentational State Transfer (REST)
+1. Uniform Interface
+2. Stateless
+3. Cacheable
+4. Client-Server
+5. Layered System
+6. Code on Demand (Optional)
+
+Primary HTTP methods:
+1. GET [SAFE] [IDEMPOTENT]
+    - `curl -i scheme://authority/path.json`
+    - `@app.get("/path")` or `@app.get("/path/{path_parameter}")`
+2. POST [] []
+    - `curl -i -X POST -H "Content-Type: application/json" -d '{"key":"value"}' scheme://authority/path`
+    `@app.post("/path/", status_code=201)`
+3. PUT [] [IDEMPOTENT]
+    - `@app.get("/path/{path_parameter}")`
+4. PATCH [] []
+    - `@app.get("/path/{path_parameter}")`
+5. DELETE [] [IDEMPOTENT]
+    - `curl -i -X DELETE scheme://authority/path/id`
+    - `@app.get("/path/{path_parameter}")`
+
+**Idempotent**: Multiple identical requests have the same effect on server as one. Allows clients to safely retry requests wi/o unintended side effects (supports fault tolerance and reliability).  
+**Safe**: Does not change server's state (READ-ONLY). Enables cached responses, reduces server load.
+
+## 5.3 Routes - FastAPI
+Installing FastAPI: `pip install "fastapi[standard]"`
+
+<details>
+<summary>If error in installing: </summary>
+
+Create a virtual environment in command:
+`python3 -m venv {environment_name}`
+
+Open specified venv in command:
+` source {environment_name}/bin/activate`
+
+Close specified venv in command:
+`deactivate`
+</details>
+
+Run app in dev mode: `fastapi dev file.ext`  
+Run app in production mode: `fastapi run file.ext`
+
+<details>
+<summary>file.py</summary>
+
+```
+from fastapi import FastAPI
+
+app = FastAPI() # Create app instance
+
+@app.get("/") # GET route for "/"
+def func():
+    return {"Hello":"World"} # Return greeting
+```
+</details>
+
+Using curl commands:
+- `curl -v {HOST}`
+- `curl {HOST}/path/path_parameter`
+
+### Concurrency
+Python's `asyncio` allows you to write concurrent code using `async` and `await` keywords.
+- Multiple tasks can overlap and run
+
+### ASGI
+Asynchronous Server Gateway Interface (ASGI) builds on Web Server Gateway Interface (WSGI).
+
+ASGI is a standard interface for async-capable Python web-servers, frameworks and applications.
+
+WSGI is a standard defining how Python webapps communicate with web servers, enabiling compatibility and portability across different servers and frameworks.
 
 # L06: Advanced - FastAPI
+## 6.1 Data Validation - Pydantic
+Importance of Data Validation:
+1. Reliability
+2. Security Risks
+3. User Experience
+4. API
+
+**Duck Typing**: Not looking at object's type to determine if it has the right interface, instead using method/attribute.
+
+Python Type Hints
+
+### Type Theory
+Basic Type Theory
+|Type|Definition|
+|-|-|
+|Composite|Built from other types|
+|Covariant|Type hierarchy preserved `tuple[bool]` is a subtype of `tuple[int]` as `bool` is a subtype of `int`|
+|Contravariant|Reverses covariant type relationships. if `Fn Callable[[bool], None]` is expected, then `Callable[[bool], None]` is acceptable |
+|Invariant|Does not allow subtype relationship; only the exact type matches. `list[bool]` is NOT a subtype of `list[int]`|
+
+### Pydantic
+- Automatic Data Validation
+- Automatic Documentation
+- Seamless Integration
+
+<details>
+<summary>file.py</summary>
+
+```
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI() # Create app instance
+
+class User(BaseModel):
+    username: str
+    age: int
+    weight: float | None = None # can be float type or None type, by default is None
+
+@app.post("/users/") # POST route for "/users/"
+async def create_user(user: User):
+    return user
+```
+</details>
+
+**FastAPI integrates with SQLModel**  
+`pip install sqlmodel`  
+<details>
+<summary>file.py</summary>
+
+```
+from fastapi import FastAPI
+from sqlmodel import Field, Session, SQLModel, create_engine, select
+
+class User(SQLModel, table=True):
+    username: str = Field(primary_key=True)
+    age: int = Field()
+    weight: float | None = Field(default=None)
+
+engine = create_engine(f"sqlite:///database.db", echo=True)
+SQLModel.metadata.create_all(engine)
+with Session(engine) as session:
+    user = User(username=input("Enter username: "), age=30)
+    session.add(user)
+    for user in session.exec(select(User)).all():
+        print(user)
+```
+</details>
+
+## 6.2 Basic Authentication
+
+
+## 6.3 Token-based Authentication - JWT
 
 # L07: Deployment
 
